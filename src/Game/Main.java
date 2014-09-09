@@ -5,12 +5,14 @@ import javax.swing.JOptionPane;
 public class Main {
 
     public static TicTakUI board = new TicTakUI();
+   
+   
     public static void main(String[] args) {
       
         if(board.isVisible()==false){
             board.setVisible(true);
         }
-        
+       
     }
     
     public static void checkforwin(){
