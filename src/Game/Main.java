@@ -16,7 +16,16 @@ public class Main {
     }
     
     public static void checkforwin(){
-        if(board.jButton1.getText().equals("X")){
+        
+        if(board.Findwinner()=='0'){
+            JOptionPane.showMessageDialog(board, "0 win..", "Win", JOptionPane.INFORMATION_MESSAGE);
+        }
+        
+        if(board.Findwinner()=='X'){
+            JOptionPane.showMessageDialog(board, "X win..", "Win", JOptionPane.INFORMATION_MESSAGE);
+        }
+        
+        /*if(board.jButton1.getText().equals("X")){
             if(board.jButton5.getText().equals("X")){
                 
                 if(board.jButton9.getText().equals("X")){
@@ -27,7 +36,7 @@ public class Main {
                     
             
             
-        }
+        }*/
     }
     
 }
