@@ -110,6 +110,11 @@ public class TicTakUI extends javax.swing.JFrame {
 
         exitButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Game/SYSTEM ALERT STOP ICON.png"))); // NOI18N
         exitButton.setText("Exit");
+        exitButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                exitButtonActionPerformed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Ravie", 0, 14)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -245,6 +250,10 @@ public class TicTakUI extends javax.swing.JFrame {
     private void newGameButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newGameButtonActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_newGameButtonActionPerformed
+
+    private void exitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitButtonActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_exitButtonActionPerformed
     
     public static char getSign(){         //This will rotate the sign between X and 0
         if(sign=='X')
