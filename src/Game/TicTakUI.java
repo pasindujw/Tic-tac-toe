@@ -1,5 +1,7 @@
 package Game;
 
+import javax.swing.JOptionPane;
+
 public class TicTakUI extends javax.swing.JFrame {
       static char sign = '0';
       public char[][] mat = new char[3][3];
@@ -9,7 +11,7 @@ public class TicTakUI extends javax.swing.JFrame {
     public TicTakUI() {
         initComponents();
         setTitle("Tic Tac Toe Game");
-      
+        setLocationRelativeTo(null);
     }
     
     /**
@@ -100,7 +102,7 @@ public class TicTakUI extends javax.swing.JFrame {
             }
         });
 
-        newGameButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Game/reload.png"))); // NOI18N
+        newGameButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/reload.png"))); // NOI18N
         newGameButton.setText("New Game");
         newGameButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -108,7 +110,7 @@ public class TicTakUI extends javax.swing.JFrame {
             }
         });
 
-        exitButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Game/SYSTEM ALERT STOP ICON.png"))); // NOI18N
+        exitButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/stop8686.png"))); // NOI18N
         exitButton.setText("Exit");
         exitButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -118,7 +120,7 @@ public class TicTakUI extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Ravie", 0, 14)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Tic Tac Toe Game");
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/tictacktoeMedium.png"))); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -173,7 +175,7 @@ public class TicTakUI extends javax.swing.JFrame {
                     .addComponent(jButton7, javax.swing.GroupLayout.DEFAULT_SIZE, 83, Short.MAX_VALUE)
                     .addComponent(jButton8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                .addGap(18, 19, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(newGameButton, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(exitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -187,49 +189,49 @@ public class TicTakUI extends javax.swing.JFrame {
         jButton2.setEnabled(false);
         jButton2.setText(getSign()+"");
         mat[0][1]=sign;
-       Main.checkforwin();
+        checkforwin();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         jButton1.setText(getSign()+"");
         jButton1.setEnabled(false);
         mat[0][0]=sign;
-        Main.checkforwin();
+        checkforwin();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
        jButton5.setText(getSign()+"");
        jButton5.setEnabled(false);
        mat[1][1]=sign;
-       Main.checkforwin();
+       checkforwin();
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
       jButton9.setText(getSign()+"");
       jButton9.setEnabled(false);
       mat[2][2]=sign;
-      Main.checkforwin();
+      checkforwin();
     }//GEN-LAST:event_jButton9ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
        jButton3.setText(getSign()+"");
        jButton3.setEnabled(false);
        mat[0][2]=sign;
-       Main.checkforwin();
+       checkforwin();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         jButton4.setText(getSign()+"");
         jButton4.setEnabled(false);
         mat[1][0] = sign;
-        Main.checkforwin();
+        checkforwin();
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         jButton6.setText(getSign()+"");
         jButton6.setEnabled(false);
         mat[1][2] =sign;
-       Main.checkforwin();
+        checkforwin();
        
     }//GEN-LAST:event_jButton6ActionPerformed
 
@@ -237,18 +239,20 @@ public class TicTakUI extends javax.swing.JFrame {
         jButton7.setText(getSign()+"");
         jButton7.setEnabled(false);
         mat[2][0]=sign;
-        Main.checkforwin();
+        checkforwin();
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
         jButton8.setText(getSign()+"");
         jButton8.setEnabled(false);
         mat[2][1] =sign;
-        Main.checkforwin();
+        checkforwin();
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void newGameButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newGameButtonActionPerformed
-        // TODO add your handling code here:
+        this.setVisible(false);
+        TicTakUI newGame= new TicTakUI();
+        newGame.setVisible(true);
     }//GEN-LAST:event_newGameButtonActionPerformed
 
     private void exitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitButtonActionPerformed
@@ -283,6 +287,18 @@ public class TicTakUI extends javax.swing.JFrame {
         } 
           return 0;
          
+    }
+    
+    public void checkforwin(){
+        
+        if(Findwinner()=='0'){
+            JOptionPane.showMessageDialog(this, "0 win..", "Win", JOptionPane.INFORMATION_MESSAGE);
+        }
+        
+        if(Findwinner()=='X'){
+            JOptionPane.showMessageDialog(this, "X win..", "Win", JOptionPane.INFORMATION_MESSAGE);
+        }
+        
     }
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
