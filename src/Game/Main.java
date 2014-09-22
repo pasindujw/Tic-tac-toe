@@ -1,43 +1,29 @@
 package Game;
 
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 
 public class Main {
 
-    public static TicTakUI board = new TicTakUI();
+    
    
    
     public static void main(String[] args) {
       
-        if(board.isVisible()==false){
-            board.setVisible(true);
+        try {
+            UIManager.setLookAndFeel("com.jtattoo.plaf.noire.NoireLookAndFeel");
+            SelectMode game = new SelectMode();
+            game.setVisible(true);
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         }
        
     }
     
-    public static void checkforwin(){
-        
-        if(board.Findwinner()=='0'){
-            JOptionPane.showMessageDialog(board, "0 win..", "Win", JOptionPane.INFORMATION_MESSAGE);
-        }
-        
-        if(board.Findwinner()=='X'){
-            JOptionPane.showMessageDialog(board, "X win..", "Win", JOptionPane.INFORMATION_MESSAGE);
-        }
-        
-        /*if(board.jButton1.getText().equals("X")){
-            if(board.jButton5.getText().equals("X")){
-                
-                if(board.jButton9.getText().equals("X")){
-                    JOptionPane.showMessageDialog(board, "Your win..", "Win", JOptionPane.OK_OPTION);
-      
-                }
-            }
-                    
-            
-            
-        }*/
-    }
     
 }
  

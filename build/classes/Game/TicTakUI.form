@@ -85,7 +85,7 @@
                   <Component id="jButton8" alignment="0" max="32767" attributes="0"/>
                   <Component id="jButton9" alignment="0" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace pref="18" max="32767" attributes="0"/>
+              <EmptySpace type="separate" pref="19" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="newGameButton" alignment="3" min="-2" pref="52" max="-2" attributes="0"/>
                   <Component id="exitButton" alignment="3" min="-2" pref="52" max="-2" attributes="0"/>
@@ -216,7 +216,7 @@
     <Component class="javax.swing.JButton" name="newGameButton">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/Game/reload.png"/>
+          <Image iconType="3" name="/images/reload.png"/>
         </Property>
         <Property name="text" type="java.lang.String" value="New Game"/>
       </Properties>
@@ -227,10 +227,13 @@
     <Component class="javax.swing.JButton" name="exitButton">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/Game/SYSTEM ALERT STOP ICON.png"/>
+          <Image iconType="3" name="/images/stop8686.png"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Exit"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="exitButtonActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
@@ -238,7 +241,9 @@
           <Font name="Ravie" size="14" style="0"/>
         </Property>
         <Property name="horizontalAlignment" type="int" value="0"/>
-        <Property name="text" type="java.lang.String" value="Tic Tac Toe Game"/>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/images/tictacktoeMedium.png"/>
+        </Property>
       </Properties>
     </Component>
   </SubComponents>
