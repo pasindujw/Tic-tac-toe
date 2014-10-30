@@ -5,6 +5,11 @@
  */
 package Game;
 
+import dbconnection.DBController;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author Upekka
@@ -15,12 +20,14 @@ public class LoginForPlayWithComputer extends javax.swing.JFrame {
      * Creates new form LoginForTwoUsers
      */
     TicTakUI board;
+    public DBController dbcontroller;
+
     public LoginForPlayWithComputer() {
         initComponents();
         setTitle("Login for playing with Computer");
-       
+
         setLocationRelativeTo(null);
-        
+        dbcontroller = new DBController();
     }
 
     /**
@@ -54,6 +61,11 @@ public class LoginForPlayWithComputer extends javax.swing.JFrame {
         txtName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtNameActionPerformed(evt);
+            }
+        });
+        txtName.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNameKeyTyped(evt);
             }
         });
 
@@ -104,11 +116,29 @@ public class LoginForPlayWithComputer extends javax.swing.JFrame {
     }//GEN-LAST:event_txtNameActionPerformed
 
     private void playButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_playButtonActionPerformed
-        board = new TicTakUI("singlePlayer",txtName.getText()+"","Computer");
-        board.setVisible(true);
-       this.setVisible(false);
-        
+        try {
+            board = new TicTakUI("singlePlayer", txtName.getText() + "", "Computer");
+            board.setVisible(true);
+            this.setVisible(false);
+            if (dbcontroller.searchUser(txtName.getText()) != 0) {
+                dbcontroller.addNewUser(txtName.getText());
+            }
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(LoginForPlayWithComputer.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(LoginForPlayWithComputer.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }//GEN-LAST:event_playButtonActionPerformed
+
+    private void txtNameKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNameKeyTyped
+        char c = evt.getKeyChar();
+
+        if (c == java.awt.event.KeyEvent.VK_ENTER) {
+            playButton.requestFocus(true);
+
+        }
+    }//GEN-LAST:event_txtNameKeyTyped
 
     /**
      * @param args the command line arguments

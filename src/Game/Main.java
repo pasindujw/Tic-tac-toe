@@ -6,8 +6,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
+//import javafx.scene.media.Media;
+//import javafx.scene.media.MediaPlayer;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
@@ -53,61 +53,61 @@ public class Main {
     }
 public static int getNextStep(JButton btn1, JButton btn2, JButton btn3, JButton btn4, JButton btn5, JButton btn6, JButton btn7, JButton btn8, JButton btn9) {
 	
-        if(btn1.getText().equals("O") && btn2.getText().equals("O") && btn3.getText().equals("")) {
+        if(btn1.getText().equals("0") && btn2.getText().equals("0") && btn3.getText().equals("")) {
                 return 3;
     }
-		else if(btn4.getText().equals("O") && btn5.getText().equals("O") && btn6.getText().equals(""))
+		else if(btn4.getText().equals("0") && btn5.getText().equals("0") && btn6.getText().equals(""))
 			return 6;
-		else if(btn7.getText().equals("O") && btn8.getText().equals("O") && btn9.getText().equals(""))
+		else if(btn7.getText().equals("0") && btn8.getText().equals("0") && btn9.getText().equals(""))
 			return 9;
 		
-		else if(btn2.getText().equals("O") && btn3.getText().equals("O") && btn1.getText().equals(""))
+		else if(btn2.getText().equals("0") && btn3.getText().equals("0") && btn1.getText().equals(""))
 			return 1;
-		else if(btn5.getText().equals("O") && btn6.getText().equals("O") && btn4.getText().equals(""))
+		else if(btn5.getText().equals("0") && btn6.getText().equals("0") && btn4.getText().equals(""))
 			return 4;
-		else if(btn8.getText().equals("O") && btn9.getText().equals("O") && btn7.getText().equals(""))
+		else if(btn8.getText().equals("0") && btn9.getText().equals("0") && btn7.getText().equals(""))
 			return 7;
 		
-		else if(btn1.getText().equals("O") && btn3.getText().equals("O") && btn2.getText().equals(""))
+		else if(btn1.getText().equals("0") && btn3.getText().equals("0") && btn2.getText().equals(""))
 			return 2;
-		else if(btn4.getText().equals("O") && btn6.getText().equals("O") && btn5.getText().equals(""))
+		else if(btn4.getText().equals("0") && btn6.getText().equals("0") && btn5.getText().equals(""))
 			return 5;
-		else if(btn7.getText().equals("O") && btn9.getText().equals("O") && btn8.getText().equals(""))
+		else if(btn7.getText().equals("0") && btn9.getText().equals("0") && btn8.getText().equals(""))
 			return 8;
 		
-		else if(btn1.getText().equals("O") && btn4.getText().equals("O") && btn7.getText().equals(""))
+		else if(btn1.getText().equals("0") && btn4.getText().equals("0") && btn7.getText().equals(""))
 			return 7;
-		else if(btn2.getText().equals("O") && btn5.getText().equals("O") && btn8.getText().equals(""))
+		else if(btn2.getText().equals("0") && btn5.getText().equals("0") && btn8.getText().equals(""))
 			return 8;
-		else if(btn3.getText().equals("O") && btn6.getText().equals("O") && btn9.getText().equals(""))
+		else if(btn3.getText().equals("0") && btn6.getText().equals("0") && btn9.getText().equals(""))
 			return 9;
 		
-		else if(btn4.getText().equals("O") && btn7.getText().equals("O") && btn1.getText().equals(""))
+		else if(btn4.getText().equals("0") && btn7.getText().equals("0") && btn1.getText().equals(""))
 			return 1;
-		else if(btn5.getText().equals("O") && btn8.getText().equals("O") && btn2.getText().equals(""))
+		else if(btn5.getText().equals("0") && btn8.getText().equals("0") && btn2.getText().equals(""))
 			return 2;
-		else if(btn6.getText().equals("O") && btn9.getText().equals("O") && btn3.getText().equals(""))
+		else if(btn6.getText().equals("0") && btn9.getText().equals("0") && btn3.getText().equals(""))
 			return 3;
 		
-		else if(btn1.getText().equals("O") && btn7.getText().equals("O") && btn4.getText().equals(""))
+		else if(btn1.getText().equals("0") && btn7.getText().equals("0") && btn4.getText().equals(""))
 			return 4;
-		else if(btn2.getText().equals("O") && btn8.getText().equals("O") && btn5.getText().equals(""))
+		else if(btn2.getText().equals("0") && btn8.getText().equals("0") && btn5.getText().equals(""))
 			return 5;
-		else if(btn3.getText().equals("O") && btn9.getText().equals("O") && btn6.getText().equals(""))
+		else if(btn3.getText().equals("0") && btn9.getText().equals("0") && btn6.getText().equals(""))
 			return 6;
 		
-		else if(btn1.getText().equals("O") && btn5.getText().equals("O") && btn9.getText().equals(""))
+		else if(btn1.getText().equals("0") && btn5.getText().equals("0") && btn9.getText().equals(""))
 			return 9;
-		else if(btn5.getText().equals("O") && btn9.getText().equals("O") && btn1.getText().equals(""))
+		else if(btn5.getText().equals("0") && btn9.getText().equals("0") && btn1.getText().equals(""))
 			return 1;
-		else if(btn1.getText().equals("O") && btn9.getText().equals("O") && btn5.getText().equals(""))
+		else if(btn1.getText().equals("0") && btn9.getText().equals("0") && btn5.getText().equals(""))
 			return 5;
 		
-		else if(btn3.getText().equals("O") && btn5.getText().equals("O") && btn7.getText().equals(""))
+		else if(btn3.getText().equals("0") && btn5.getText().equals("0") && btn7.getText().equals(""))
 			return 7;
-		else if(btn7.getText().equals("O") && btn5.getText().equals("O") && btn3.getText().equals(""))
+		else if(btn7.getText().equals("0") && btn5.getText().equals("0") && btn3.getText().equals(""))
 			return 3;
-		else if(btn7.getText().equals("O") && btn3.getText().equals("O") && btn5.getText().equals(""))
+		else if(btn7.getText().equals("0") && btn3.getText().equals("0") && btn5.getText().equals(""))
 			return 5;
 		
 		else if(btn1.getText().equals("X") && btn2.getText().equals("X") && btn3.getText().equals(""))

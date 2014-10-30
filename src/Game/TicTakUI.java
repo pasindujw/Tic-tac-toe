@@ -1,6 +1,11 @@
 package Game;
 
+import dbconnection.DBController;
 import java.awt.HeadlessException;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
@@ -9,6 +14,7 @@ public class TicTakUI extends javax.swing.JFrame {
     String playmode;
     String user1;
     String user2;
+    DBController dbcontroller;
     static char sign = '0';
     public char[][] mat = new char[3][3];
 
@@ -20,6 +26,7 @@ public class TicTakUI extends javax.swing.JFrame {
         this.playmode = playmode;
         this.user1 = user1;
         this.user2 = user2;
+        dbcontroller = new DBController();
         setTitle("Tic Tac Toe Game");
         setLocationRelativeTo(null);
         System.out.println(user1 + "   ;;; " + user2);
@@ -201,9 +208,9 @@ public class TicTakUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn2ActionPerformed
-        
+
         btn2.setText(getSign() + "");
-        
+
         btn2.setEnabled(false);
         mat[0][1] = sign;
         checkforwin();
@@ -283,7 +290,11 @@ public class TicTakUI extends javax.swing.JFrame {
     }//GEN-LAST:event_newGameButtonActionPerformed
 
     private void exitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitButtonActionPerformed
-        System.exit(0);
+        int showConfirmDialog = JOptionPane.showConfirmDialog(this, "Are you sure that you want to exit ?");
+        if (showConfirmDialog == 0) {
+            System.exit(0);
+        }
+
     }//GEN-LAST:event_exitButtonActionPerformed
 
     public static char getSign() {         //This will rotate the sign between X and 0
@@ -298,43 +309,63 @@ public class TicTakUI extends javax.swing.JFrame {
 
     /*method to find whether a row, column or a diagonal has a winning pattern
      mat[][] array used to check winning pattern*/
-   
-
     public void checkforwin() {
+        int noOfwin = 0;
 
         if (Main.Findwinner(mat) == '0') {
+
+            try {
+                ResultSet rst = dbcontroller.getWinnings(user2);
+                if (rst.next()) {
+                    noOfwin = rst.getInt("Winnings") + 1;
+                    System.out.println(noOfwin);
+                    dbcontroller.updateUserStatistics(user2, noOfwin);
+                }
+            } catch (ClassNotFoundException | SQLException ex) {
+                Logger.getLogger(TicTakUI.class.getName()).log(Level.SEVERE, null, ex);
+            }
             JOptionPane.showMessageDialog(this, (user2 + " has won the match!"), "Congratulations!", JOptionPane.INFORMATION_MESSAGE);
-              newGameButtonActionPerformed(null);
+            newGameButtonActionPerformed(null);
         } else if (Main.Findwinner(mat) == 'X') {
+
+            try {
+                ResultSet rst = dbcontroller.getWinnings(user1);
+                if (rst.next()) {
+                    noOfwin = rst.getInt("Winnings") + 1;
+                    System.out.println(noOfwin);
+                    dbcontroller.updateUserStatistics(user1, noOfwin);
+                }
+            } catch (ClassNotFoundException | SQLException ex) {
+                Logger.getLogger(TicTakUI.class.getName()).log(Level.SEVERE, null, ex);
+            }
             JOptionPane.showMessageDialog(this, (user1 + " has won the match!"), "Congratulations!", JOptionPane.INFORMATION_MESSAGE);
-              newGameButtonActionPerformed(null);
-        }
-        else{
-        boolean flagMatFull = true;
-        for(int i=0;i<3;i++){
-            for(int j=0;j<3;j++){
-                if(mat[i][j]!='0'&&mat[i][j]!='X'){
-                    flagMatFull = false;
+            newGameButtonActionPerformed(null);
+        } else {
+            boolean flagMatFull = true;
+            for (int i = 0; i < 3; i++) {
+                for (int j = 0; j < 3; j++) {
+                    if (mat[i][j] != '0' && mat[i][j] != 'X') {
+                        flagMatFull = false;
+                        break;
+                    }
+                }
+                if (flagMatFull == false) {
                     break;
                 }
+
             }
-            if(flagMatFull == false)
-                break;
-            
-        }
-        if(flagMatFull==true){
-              JOptionPane.showMessageDialog(this, ("Match tied!"), "Sorry!", JOptionPane.INFORMATION_MESSAGE);
-              newGameButtonActionPerformed(null);
-        }
-            
-        
+            if (flagMatFull == true) {
+                JOptionPane.showMessageDialog(this, ("Match tied!"), "Sorry!", JOptionPane.INFORMATION_MESSAGE);
+                newGameButtonActionPerformed(null);
+            }
+
         }
     }
 
     public void nextMove() {
         if (playmode.equals("singlePlayer")) {
             int nextPosition = Main.getNextStep(btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9);
-            System.out.println("Position " +nextPosition);
+            System.out.println("Position " + nextPosition);
             switch (nextPosition) {
                 case 1:
 
@@ -380,7 +411,7 @@ public class TicTakUI extends javax.swing.JFrame {
                 case 9:
                     btn9.setText(getSign() + "");
                     btn9.setEnabled(false);
-                    
+
                     mat[2][2] = sign;
                     break;
                 case 0:
@@ -390,75 +421,77 @@ public class TicTakUI extends javax.swing.JFrame {
             checkforwin();
         }
     }
-    public void randomMove(){
-        int randomX = (int)(Math.random() * 2);
-        int randomY = (int)(Math.random() * 2);
-        if(mat[randomX][randomY] != '0' && mat[randomX][randomY] != 'X' ){
-            System.out.println("Random" + randomX+randomY);
-            switch (randomX){
+
+    public void randomMove() {
+        int randomX = (int) (Math.random() * 2);
+        int randomY = (int) (Math.random() * 2);
+        if (mat[randomX][randomY] != '0' && mat[randomX][randomY] != 'X') {
+            System.out.println("Random" + randomX + randomY);
+            switch (randomX) {
                 case 0:
-                    switch (randomY){
+                    switch (randomY) {
                         case 0:
-                             btn1.setText(getSign() + "");
-                    btn1.setEnabled(false);
-                    mat[0][0] = sign;
+                            btn1.setText(getSign() + "");
+                            btn1.setEnabled(false);
+                            mat[0][0] = sign;
                             break;
                         case 1:
-                              btn2.setText(getSign() + "");
-                    btn2.setEnabled(false);
-                    mat[0][1] = sign;
+                            btn2.setText(getSign() + "");
+                            btn2.setEnabled(false);
+                            mat[0][1] = sign;
                             break;
                         case 2:
-                             btn3.setText(getSign() + "");
-                    setEnabled(false);
-                    mat[0][2] = sign;
+                            btn3.setText(getSign() + "");
+                            setEnabled(false);
+                            mat[0][2] = sign;
                             break;
                     }
                     break;
                 case 1:
-                     switch (randomY){
+                    switch (randomY) {
                         case 0:
-                             btn4.setText(getSign() + "");
-                    btn4.setEnabled(false);
-                    mat[1][0] = sign;
+                            btn4.setText(getSign() + "");
+                            btn4.setEnabled(false);
+                            mat[1][0] = sign;
                             break;
                         case 1:
-                              btn5.setText(getSign() + "");
-                    btn5.setEnabled(false);
-                    mat[1][1] = sign;
+                            btn5.setText(getSign() + "");
+                            btn5.setEnabled(false);
+                            mat[1][1] = sign;
                             break;
                         case 2:
-                               btn6.setText(getSign() + "");
-                    btn6.setEnabled(false);
-                    mat[1][2] = sign;
+                            btn6.setText(getSign() + "");
+                            btn6.setEnabled(false);
+                            mat[1][2] = sign;
                             break;
                     }
                     break;
                 case 2:
-                     switch (randomY){
+                    switch (randomY) {
                         case 0:
-                                 btn7.setText(getSign() + "");
-                    btn7.setEnabled(false);
-                    mat[2][0] = sign;
+                            btn7.setText(getSign() + "");
+                            btn7.setEnabled(false);
+                            mat[2][0] = sign;
                             break;
                         case 1:
-                                btn8.setText(getSign() + "");
-                    btn8.setEnabled(false);
-                    mat[2][1] = sign;
+                            btn8.setText(getSign() + "");
+                            btn8.setEnabled(false);
+                            mat[2][1] = sign;
                             break;
                         case 2:
-                                btn9.setText(getSign() + "");
-                    btn9.setEnabled(false);
-                    
-                    mat[2][2] = sign;
+                            btn9.setText(getSign() + "");
+                            btn9.setEnabled(false);
+
+                            mat[2][2] = sign;
                             break;
                     }
-                break;
+                    break;
+            }
+
         }
-        }
-        
+
     }
-    
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -489,9 +522,9 @@ public class TicTakUI extends javax.swing.JFrame {
                 new TicTakUI().setVisible(true);
             }
         });
-        
+
     }
-    
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton btn1;

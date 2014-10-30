@@ -5,6 +5,11 @@
  */
 package Game;
 
+import dbconnection.DBController;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author Upekka
@@ -15,12 +20,14 @@ public class LoginForTwoUsers extends javax.swing.JFrame {
      * Creates new form LoginForTwoUsers
      */
     public static TicTakUI board;
+    public DBController dbcontroller;
     
     public LoginForTwoUsers() {
         initComponents();
         setTitle("Login for two users");
        
         setLocationRelativeTo(null);
+        dbcontroller=new DBController();
     }
 
     /**
@@ -61,11 +68,21 @@ public class LoginForTwoUsers extends javax.swing.JFrame {
                 txtUser1ActionPerformed(evt);
             }
         });
+        txtUser1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtUser1KeyTyped(evt);
+            }
+        });
 
         txtUser2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         txtUser2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtUser2ActionPerformed(evt);
+            }
+        });
+        txtUser2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtUser2KeyTyped(evt);
             }
         });
 
@@ -126,11 +143,43 @@ public class LoginForTwoUsers extends javax.swing.JFrame {
     }//GEN-LAST:event_txtUser2ActionPerformed
 
     private void playButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_playButtonActionPerformed
-        board = new TicTakUI("twoPlayer",txtUser1.getText()+"",txtUser2.getText()+"");
-        board.setVisible(true);
-        this.setVisible(false);
+        try {
+            board = new TicTakUI("twoPlayer",txtUser1.getText()+"",txtUser2.getText()+"");
+            board.setVisible(true);
+            this.setVisible(false);
+            if(dbcontroller.searchUser(txtUser1.getText())==0){
+                dbcontroller.addNewUser(txtUser1.getText());
+                System.out.println("added 1");
+            }
+            if(dbcontroller.searchUser(txtUser2.getText())==0){
+                dbcontroller.addNewUser(txtUser2.getText());
+                System.out.println("added 2");
+            }
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(LoginForTwoUsers.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(LoginForTwoUsers.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
     }//GEN-LAST:event_playButtonActionPerformed
+
+    private void txtUser1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUser1KeyTyped
+        char c = evt.getKeyChar();
+
+        if (c == java.awt.event.KeyEvent.VK_ENTER) {
+            txtUser2.requestFocus(true);
+
+        }
+    }//GEN-LAST:event_txtUser1KeyTyped
+
+    private void txtUser2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUser2KeyTyped
+        char c = evt.getKeyChar();
+
+        if (c == java.awt.event.KeyEvent.VK_ENTER) {
+            playButton.requestFocus(true);
+
+        }
+    }//GEN-LAST:event_txtUser2KeyTyped
 
     /**
      * @param args the command line arguments
