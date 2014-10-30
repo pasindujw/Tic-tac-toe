@@ -2,13 +2,13 @@ package Game;
 
 import javax.swing.JOptionPane;
 
-public class TicTakUI extends javax.swing.JFrame {
+public class TicTakUIwithComputer extends javax.swing.JFrame {
       static char sign = '0';
       public char[][] mat = new char[3][3];
     /**
      * Creates new form TicTakUI
      */
-    public TicTakUI() {
+    public TicTakUIwithComputer() {
         initComponents();
         setTitle("Tic Tac Toe Game");
         setLocationRelativeTo(null);
@@ -251,7 +251,7 @@ public class TicTakUI extends javax.swing.JFrame {
 
     private void newGameButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newGameButtonActionPerformed
         this.setVisible(false);
-        TicTakUI newGame= new TicTakUI();
+        TicTakUIwithComputer newGame= new TicTakUIwithComputer();
         newGame.setVisible(true);
     }//GEN-LAST:event_newGameButtonActionPerformed
 
@@ -315,20 +315,21 @@ public class TicTakUI extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TicTakUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TicTakUIwithComputer.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TicTakUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TicTakUIwithComputer.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TicTakUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TicTakUIwithComputer.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TicTakUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TicTakUIwithComputer.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
         
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new TicTakUI().setVisible(true);
+                new TicTakUIwithComputer().setVisible(true);
             }
         });
     }
