@@ -1,19 +1,40 @@
 package Game;
 
+import dbconnection.DBController;
+import java.awt.HeadlessException;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
 public class TicTakUI extends javax.swing.JFrame {
-      static char sign = '0';
-      public char[][] mat = new char[3][3];
+
+    String playmode;
+    String user1;
+    String user2;
+    DBController dbcontroller;
+    static char sign = '0';
+    public char[][] mat = new char[3][3];
+
     /**
      * Creates new form TicTakUI
      */
-    public TicTakUI() {
+    public TicTakUI(String playmode, String user1, String user2) {
         initComponents();
+        this.playmode = playmode;
+        this.user1 = user1;
+        this.user2 = user2;
+        dbcontroller = new DBController();
         setTitle("Tic Tac Toe Game");
         setLocationRelativeTo(null);
+        System.out.println(user1 + "   ;;; " + user2);
     }
-    
+
+    public TicTakUI() throws HeadlessException {
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -23,82 +44,83 @@ public class TicTakUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
-        jButton7 = new javax.swing.JButton();
-        jButton8 = new javax.swing.JButton();
-        jButton9 = new javax.swing.JButton();
+        btn1 = new javax.swing.JButton();
+        btn2 = new javax.swing.JButton();
+        btn3 = new javax.swing.JButton();
+        btn4 = new javax.swing.JButton();
+        btn5 = new javax.swing.JButton();
+        btn6 = new javax.swing.JButton();
+        btn7 = new javax.swing.JButton();
+        btn8 = new javax.swing.JButton();
+        btn9 = new javax.swing.JButton();
         newGameButton = new javax.swing.JButton();
         exitButton = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("TikTakToe");
+        setType(java.awt.Window.Type.POPUP);
 
-        jButton1.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btn1.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
+        btn1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btn1ActionPerformed(evt);
             }
         });
 
-        jButton2.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btn2.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
+        btn2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btn2ActionPerformed(evt);
             }
         });
 
-        jButton3.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        btn3.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
+        btn3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                btn3ActionPerformed(evt);
             }
         });
 
-        jButton4.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        btn4.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
+        btn4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                btn4ActionPerformed(evt);
             }
         });
 
-        jButton5.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        btn5.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
+        btn5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                btn5ActionPerformed(evt);
             }
         });
 
-        jButton6.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
+        btn6.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
+        btn6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
+                btn6ActionPerformed(evt);
             }
         });
 
-        jButton7.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
-        jButton7.addActionListener(new java.awt.event.ActionListener() {
+        btn7.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
+        btn7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton7ActionPerformed(evt);
+                btn7ActionPerformed(evt);
             }
         });
 
-        jButton8.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
-        jButton8.addActionListener(new java.awt.event.ActionListener() {
+        btn8.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
+        btn8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton8ActionPerformed(evt);
+                btn8ActionPerformed(evt);
             }
         });
 
-        jButton9.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
-        jButton9.addActionListener(new java.awt.event.ActionListener() {
+        btn9.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
+        btn9.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton9ActionPerformed(evt);
+                btn9ActionPerformed(evt);
             }
         });
 
@@ -131,19 +153,19 @@ public class TicTakUI extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jButton7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 83, Short.MAX_VALUE)
-                            .addComponent(jButton4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(btn7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 83, Short.MAX_VALUE)
+                            .addComponent(btn4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btn1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 83, Short.MAX_VALUE)
-                            .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(btn2, javax.swing.GroupLayout.DEFAULT_SIZE, 83, Short.MAX_VALUE)
+                            .addComponent(btn5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btn8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, 83, Short.MAX_VALUE)
-                            .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(btn3, javax.swing.GroupLayout.DEFAULT_SIZE, 83, Short.MAX_VALUE)
+                            .addComponent(btn6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btn9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(newGameButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -162,19 +184,19 @@ public class TicTakUI extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 83, Short.MAX_VALUE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btn2, javax.swing.GroupLayout.DEFAULT_SIZE, 83, Short.MAX_VALUE)
+                    .addComponent(btn3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btn1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, 83, Short.MAX_VALUE)
-                    .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btn4, javax.swing.GroupLayout.DEFAULT_SIZE, 83, Short.MAX_VALUE)
+                    .addComponent(btn5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btn6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton7, javax.swing.GroupLayout.DEFAULT_SIZE, 83, Short.MAX_VALUE)
-                    .addComponent(jButton8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btn7, javax.swing.GroupLayout.DEFAULT_SIZE, 83, Short.MAX_VALUE)
+                    .addComponent(btn8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btn9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 19, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(newGameButton, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -185,122 +207,291 @@ public class TicTakUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        jButton2.setEnabled(false);
-        jButton2.setText(getSign()+"");
-        mat[0][1]=sign;
+    private void btn2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn2ActionPerformed
+
+        btn2.setText(getSign() + "");
+
+        btn2.setEnabled(false);
+        mat[0][1] = sign;
         checkforwin();
-    }//GEN-LAST:event_jButton2ActionPerformed
+        nextMove();
+    }//GEN-LAST:event_btn2ActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        jButton1.setText(getSign()+"");
-        jButton1.setEnabled(false);
-        mat[0][0]=sign;
+    private void btn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn1ActionPerformed
+        btn1.setText(getSign() + "");
+        btn1.setEnabled(false);
+        mat[0][0] = sign;
         checkforwin();
-    }//GEN-LAST:event_jButton1ActionPerformed
+        nextMove();
+    }//GEN-LAST:event_btn1ActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-       jButton5.setText(getSign()+"");
-       jButton5.setEnabled(false);
-       mat[1][1]=sign;
-       checkforwin();
-    }//GEN-LAST:event_jButton5ActionPerformed
+    private void btn5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn5ActionPerformed
+        btn5.setText(getSign() + "");
+        btn5.setEnabled(false);
+        mat[1][1] = sign;
+        checkforwin();
+        nextMove();
+    }//GEN-LAST:event_btn5ActionPerformed
 
-    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
-      jButton9.setText(getSign()+"");
-      jButton9.setEnabled(false);
-      mat[2][2]=sign;
-      checkforwin();
-    }//GEN-LAST:event_jButton9ActionPerformed
+    private void btn9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn9ActionPerformed
+        btn9.setText(getSign() + "");
+        btn9.setEnabled(false);
+        mat[2][2] = sign;
+        checkforwin();
+        nextMove();
+    }//GEN-LAST:event_btn9ActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-       jButton3.setText(getSign()+"");
-       jButton3.setEnabled(false);
-       mat[0][2]=sign;
-       checkforwin();
-    }//GEN-LAST:event_jButton3ActionPerformed
+    private void btn3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn3ActionPerformed
+        btn3.setText(getSign() + "");
+        btn3.setEnabled(false);
+        mat[0][2] = sign;
+        checkforwin();
+        nextMove();
+    }//GEN-LAST:event_btn3ActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        jButton4.setText(getSign()+"");
-        jButton4.setEnabled(false);
+    private void btn4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn4ActionPerformed
+        btn4.setText(getSign() + "");
+        btn4.setEnabled(false);
         mat[1][0] = sign;
         checkforwin();
-    }//GEN-LAST:event_jButton4ActionPerformed
+        nextMove();
+    }//GEN-LAST:event_btn4ActionPerformed
 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        jButton6.setText(getSign()+"");
-        jButton6.setEnabled(false);
-        mat[1][2] =sign;
+    private void btn6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn6ActionPerformed
+        btn6.setText(getSign() + "");
+        btn6.setEnabled(false);
+        mat[1][2] = sign;
         checkforwin();
-       
-    }//GEN-LAST:event_jButton6ActionPerformed
+        nextMove();
 
-    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        jButton7.setText(getSign()+"");
-        jButton7.setEnabled(false);
-        mat[2][0]=sign;
-        checkforwin();
-    }//GEN-LAST:event_jButton7ActionPerformed
+    }//GEN-LAST:event_btn6ActionPerformed
 
-    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-        jButton8.setText(getSign()+"");
-        jButton8.setEnabled(false);
-        mat[2][1] =sign;
+    private void btn7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn7ActionPerformed
+        btn7.setText(getSign() + "");
+        btn7.setEnabled(false);
+        mat[2][0] = sign;
         checkforwin();
-    }//GEN-LAST:event_jButton8ActionPerformed
+        nextMove();
+    }//GEN-LAST:event_btn7ActionPerformed
+
+    private void btn8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn8ActionPerformed
+        btn8.setText(getSign() + "");
+        btn8.setEnabled(false);
+        mat[2][1] = sign;
+        checkforwin();
+        nextMove();
+    }//GEN-LAST:event_btn8ActionPerformed
 
     private void newGameButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newGameButtonActionPerformed
         this.setVisible(false);
-        TicTakUI newGame= new TicTakUI();
+        TicTakUI newGame = new TicTakUI(playmode, user1, user2);
         newGame.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_newGameButtonActionPerformed
 
     private void exitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitButtonActionPerformed
-        System.exit(0);
+        int showConfirmDialog = JOptionPane.showConfirmDialog(this, "Are you sure that you want to exit ?");
+        if (showConfirmDialog == 0) {
+            System.exit(0);
+        }
+
     }//GEN-LAST:event_exitButtonActionPerformed
-    
-    public static char getSign(){         //This will rotate the sign between X and 0
-        if(sign=='X')
+
+    public static char getSign() {         //This will rotate the sign between X and 0
+        if (sign == 'X') {
             sign = '0';
-        else if(sign=='0')
+        } else if (sign == '0') {
             sign = 'X';
-        
+        }
+
         return sign;
     }
-    
+
     /*method to find whether a row, column or a diagonal has a winning pattern
      mat[][] array used to check winning pattern*/
-    public char Findwinner(){
-        for(int i=0;i<=2;i++){      
-                if(mat[i][0]==mat[i][1] && mat[i][1]==mat[i][2]){   //check rows
-                  return mat[i][0];  
-                } 
-                else if(mat[0][i]==mat[1][i] && mat[1][i]==mat[2][i]){  //check columns
-                  return mat[0][i];  
-                }                 
+    public void checkforwin() {
+        int noOfwin = 0;
+
+        if (Main.Findwinner(mat) == '0') {
+
+            try {
+                ResultSet rst = dbcontroller.getWinnings(user2);
+                if (rst.next()) {
+                    noOfwin = rst.getInt("Winnings") + 1;
+                    System.out.println(noOfwin);
+                    dbcontroller.updateUserStatistics(user2, noOfwin);
+                }
+            } catch (ClassNotFoundException | SQLException ex) {
+                Logger.getLogger(TicTakUI.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            JOptionPane.showMessageDialog(this, (user2 + " has won the match!"), "Congratulations!", JOptionPane.INFORMATION_MESSAGE);
+            newGameButtonActionPerformed(null);
+        } else if (Main.Findwinner(mat) == 'X') {
+
+            try {
+                ResultSet rst = dbcontroller.getWinnings(user1);
+                if (rst.next()) {
+                    noOfwin = rst.getInt("Winnings") + 1;
+                    System.out.println(noOfwin);
+                    dbcontroller.updateUserStatistics(user1, noOfwin);
+                }
+            } catch (ClassNotFoundException | SQLException ex) {
+                Logger.getLogger(TicTakUI.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            JOptionPane.showMessageDialog(this, (user1 + " has won the match!"), "Congratulations!", JOptionPane.INFORMATION_MESSAGE);
+            newGameButtonActionPerformed(null);
+        } else {
+            boolean flagMatFull = true;
+            for (int i = 0; i < 3; i++) {
+                for (int j = 0; j < 3; j++) {
+                    if (mat[i][j] != '0' && mat[i][j] != 'X') {
+                        flagMatFull = false;
+                        break;
+                    }
+                }
+                if (flagMatFull == false) {
+                    break;
+                }
+
+            }
+            if (flagMatFull == true) {
+                JOptionPane.showMessageDialog(this, ("Match tied!"), "Sorry!", JOptionPane.INFORMATION_MESSAGE);
+                newGameButtonActionPerformed(null);
+            }
+
         }
-        if(mat[0][0]==mat[1][1] && mat[1][1]==mat[2][2]){   //check diagonals
-            return mat[0][0];
-        } 
-        if(mat[0][2]==mat[1][1] && mat[1][1]==mat[2][0]){   //check diagonals
-            return mat[0][2];
-        } 
-          return 0;
-         
     }
-    
-    public void checkforwin(){
-        
-        if(Findwinner()=='0'){
-            JOptionPane.showMessageDialog(this, "User 2 win..", "Win", JOptionPane.INFORMATION_MESSAGE);
-            
+
+    public void nextMove() {
+        if (playmode.equals("singlePlayer")) {
+            int nextPosition = Main.getNextStep(btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9);
+            System.out.println("Position " + nextPosition);
+            switch (nextPosition) {
+                case 1:
+
+                    btn1.setText(getSign() + "");
+                    btn1.setEnabled(false);
+                    mat[0][0] = sign;
+                    break;
+                case 2:
+                    btn2.setText(getSign() + "");
+                    btn2.setEnabled(false);
+                    mat[0][1] = sign;
+                    break;
+                case 3:
+                    btn3.setText(getSign() + "");
+                    btn3.setEnabled(false);
+                    mat[0][2] = sign;
+                    break;
+                case 4:
+                    btn4.setText(getSign() + "");
+                    btn4.setEnabled(false);
+                    mat[1][0] = sign;
+                    break;
+                case 5:
+                    btn5.setText(getSign() + "");
+                    btn5.setEnabled(false);
+                    mat[1][1] = sign;
+                    break;
+                case 6:
+                    btn6.setText(getSign() + "");
+                    btn6.setEnabled(false);
+                    mat[1][2] = sign;
+                    break;
+                case 7:
+                    btn7.setText(getSign() + "");
+                    btn7.setEnabled(false);
+                    mat[2][0] = sign;
+                    break;
+                case 8:
+                    btn8.setText(getSign() + "");
+                    btn8.setEnabled(false);
+                    mat[2][1] = sign;
+                    break;
+                case 9:
+                    btn9.setText(getSign() + "");
+                    btn9.setEnabled(false);
+
+                    mat[2][2] = sign;
+                    break;
+                case 0:
+                    randomMove();
+                    break;
+            }
+            checkforwin();
         }
-        
-        if(Findwinner()=='X'){
-            JOptionPane.showMessageDialog(this, "User 1 win..", "Win", JOptionPane.INFORMATION_MESSAGE);
-        }
-        
     }
+
+    public void randomMove() {
+        int randomX = (int) (Math.random() * 2);
+        int randomY = (int) (Math.random() * 2);
+        if (mat[randomX][randomY] != '0' && mat[randomX][randomY] != 'X') {
+            System.out.println("Random" + randomX + randomY);
+            switch (randomX) {
+                case 0:
+                    switch (randomY) {
+                        case 0:
+                            btn1.setText(getSign() + "");
+                            btn1.setEnabled(false);
+                            mat[0][0] = sign;
+                            break;
+                        case 1:
+                            btn2.setText(getSign() + "");
+                            btn2.setEnabled(false);
+                            mat[0][1] = sign;
+                            break;
+                        case 2:
+                            btn3.setText(getSign() + "");
+                            setEnabled(false);
+                            mat[0][2] = sign;
+                            break;
+                    }
+                    break;
+                case 1:
+                    switch (randomY) {
+                        case 0:
+                            btn4.setText(getSign() + "");
+                            btn4.setEnabled(false);
+                            mat[1][0] = sign;
+                            break;
+                        case 1:
+                            btn5.setText(getSign() + "");
+                            btn5.setEnabled(false);
+                            mat[1][1] = sign;
+                            break;
+                        case 2:
+                            btn6.setText(getSign() + "");
+                            btn6.setEnabled(false);
+                            mat[1][2] = sign;
+                            break;
+                    }
+                    break;
+                case 2:
+                    switch (randomY) {
+                        case 0:
+                            btn7.setText(getSign() + "");
+                            btn7.setEnabled(false);
+                            mat[2][0] = sign;
+                            break;
+                        case 1:
+                            btn8.setText(getSign() + "");
+                            btn8.setEnabled(false);
+                            mat[2][1] = sign;
+                            break;
+                        case 2:
+                            btn9.setText(getSign() + "");
+                            btn9.setEnabled(false);
+
+                            mat[2][2] = sign;
+                            break;
+                    }
+                    break;
+            }
+
+        }
+
+    }
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -324,26 +515,28 @@ public class TicTakUI extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(TicTakUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-        
+
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new TicTakUI().setVisible(true);
             }
         });
+
     }
 
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public javax.swing.JButton btn1;
+    public javax.swing.JButton btn2;
+    public javax.swing.JButton btn3;
+    public javax.swing.JButton btn4;
+    public javax.swing.JButton btn5;
+    public javax.swing.JButton btn6;
+    public javax.swing.JButton btn7;
+    public javax.swing.JButton btn8;
+    public javax.swing.JButton btn9;
     private javax.swing.JButton exitButton;
-    public javax.swing.JButton jButton1;
-    public javax.swing.JButton jButton2;
-    public javax.swing.JButton jButton3;
-    public javax.swing.JButton jButton4;
-    public javax.swing.JButton jButton5;
-    public javax.swing.JButton jButton6;
-    public javax.swing.JButton jButton7;
-    public javax.swing.JButton jButton8;
-    public javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JButton newGameButton;
     // End of variables declaration//GEN-END:variables

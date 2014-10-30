@@ -5,6 +5,11 @@
  */
 package Game;
 
+import dbconnection.DBController;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author Upekka
@@ -15,12 +20,14 @@ public class LoginForTwoUsers extends javax.swing.JFrame {
      * Creates new form LoginForTwoUsers
      */
     public static TicTakUI board;
+    public DBController dbcontroller;
     
     public LoginForTwoUsers() {
         initComponents();
         setTitle("Login for two users");
-        board = new TicTakUI();
+       
         setLocationRelativeTo(null);
+        dbcontroller=new DBController();
     }
 
     /**
@@ -35,8 +42,8 @@ public class LoginForTwoUsers extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         playButton = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
+        txtUser1 = new javax.swing.JTextField();
+        txtUser2 = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -55,22 +62,32 @@ public class LoginForTwoUsers extends javax.swing.JFrame {
             }
         });
 
-        jTextField1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        txtUser1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtUser1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                txtUser1ActionPerformed(evt);
+            }
+        });
+        txtUser1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtUser1KeyTyped(evt);
             }
         });
 
-        jTextField2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+        txtUser2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtUser2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
+                txtUser2ActionPerformed(evt);
+            }
+        });
+        txtUser2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtUser2KeyTyped(evt);
             }
         });
 
         jLabel3.setFont(new java.awt.Font("Ravie", 1, 24)); // NOI18N
-        jLabel3.setText("Login User");
+        jLabel3.setText("Enter the Names");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -83,53 +100,86 @@ public class LoginForTwoUsers extends javax.swing.JFrame {
                     .addComponent(jLabel1))
                 .addGap(66, 66, 66)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 178, Short.MAX_VALUE)
-                    .addComponent(jTextField2))
+                    .addComponent(txtUser1, javax.swing.GroupLayout.DEFAULT_SIZE, 178, Short.MAX_VALUE)
+                    .addComponent(txtUser2))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(116, Short.MAX_VALUE)
+                .addContainerGap(81, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jLabel3)
-                        .addGap(106, 106, 106))
+                        .addGap(60, 60, 60))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(playButton)
-                        .addGap(147, 147, 147))))
+                        .addGap(102, 102, 102))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(27, 27, 27)
+                .addGap(30, 30, 30)
                 .addComponent(jLabel3)
-                .addGap(32, 32, 32)
+                .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtUser1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
                 .addGap(24, 24, 24)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                    .addComponent(txtUser2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
                 .addComponent(playButton)
-                .addGap(23, 23, 23))
+                .addGap(25, 25, 25))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void txtUser1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUser1ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_txtUser1ActionPerformed
 
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+    private void txtUser2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUser2ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
+    }//GEN-LAST:event_txtUser2ActionPerformed
 
     private void playButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_playButtonActionPerformed
-        board.setVisible(true);
-        this.setVisible(false);
+        try {
+            board = new TicTakUI("twoPlayer",txtUser1.getText()+"",txtUser2.getText()+"");
+            board.setVisible(true);
+            this.setVisible(false);
+            if(dbcontroller.searchUser(txtUser1.getText())==0){
+                dbcontroller.addNewUser(txtUser1.getText());
+                System.out.println("added 1");
+            }
+            if(dbcontroller.searchUser(txtUser2.getText())==0){
+                dbcontroller.addNewUser(txtUser2.getText());
+                System.out.println("added 2");
+            }
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(LoginForTwoUsers.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(LoginForTwoUsers.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
     }//GEN-LAST:event_playButtonActionPerformed
+
+    private void txtUser1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUser1KeyTyped
+        char c = evt.getKeyChar();
+
+        if (c == java.awt.event.KeyEvent.VK_ENTER) {
+            txtUser2.requestFocus(true);
+
+        }
+    }//GEN-LAST:event_txtUser1KeyTyped
+
+    private void txtUser2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUser2KeyTyped
+        char c = evt.getKeyChar();
+
+        if (c == java.awt.event.KeyEvent.VK_ENTER) {
+            playButton.requestFocus(true);
+
+        }
+    }//GEN-LAST:event_txtUser2KeyTyped
 
     /**
      * @param args the command line arguments
@@ -170,8 +220,8 @@ public class LoginForTwoUsers extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
     private javax.swing.JButton playButton;
+    private javax.swing.JTextField txtUser1;
+    private javax.swing.JTextField txtUser2;
     // End of variables declaration//GEN-END:variables
 }
