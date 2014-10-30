@@ -19,8 +19,7 @@ public class SelectMode extends javax.swing.JFrame {
     
     public SelectMode() {
         initComponents();
-        twoUser= new LoginForTwoUsers();
-        withComputer = new LoginForPlayWithComputer();
+        
         setLocationRelativeTo(null);
     }
 
@@ -97,12 +96,13 @@ public class SelectMode extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void twoPlayerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_twoPlayerButtonActionPerformed
-        
+        twoUser = new LoginForTwoUsers();
         twoUser.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_twoPlayerButtonActionPerformed
 
     private void withComputerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_withComputerButtonActionPerformed
+        withComputer = new LoginForPlayWithComputer();
         withComputer.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_withComputerButtonActionPerformed
